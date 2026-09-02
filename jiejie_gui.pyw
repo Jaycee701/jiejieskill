@@ -73,7 +73,6 @@ TOOLS = [
     ('tls',           'tls',                'TLS 弱配置检测'),
     ('card',          'card',               '卡号/磁道工具'),
     ('frida',         'frida_run',          'Frida 运行时抓 key/iv'),
-    ('xss-scan',      'xss_scan',           'XSS 三型检测 (反射/存储/DOM)'),
 ]
 TOOL_NAMES = [n for n, *_ in TOOLS]
 

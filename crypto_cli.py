@@ -57,10 +57,9 @@ TOOLS = [
     ('card',          'card',               '卡号/磁道工具',            '提取'),
     ('frida',         'frida_run',          'Frida 运行时抓 key/iv',    '动态'),
     ('http-brute',    'http_brute',         'HTTP 表单并发爆破',        '爆破'),
-    ('xss-scan',      'xss_scan',           'XSS 三型检测 (反射/存储/DOM)', '漏洞'),
 ]
 
-CATEGORIES = ['签名', '对称', '哈希', '提取', '动态', '爆破', '漏洞']
+CATEGORIES = ['签名', '对称', '哈希', '提取', '动态', '爆破']
 
 # 本包自带脚本目录 (优先使用, 保证便携; 不存在才回退到 skill)
 LOCAL_SCRIPTS = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'scripts')
