@@ -12,7 +12,7 @@ metadata:
 
 **适用目标**：Web 网站 / 小程序 / 内网与域环境 / 云环境 / 金融与银行业务系统。**App（Android/iOS）单独使用 `app-pentest` 技能测试**；小程序深度自动化审计引用 `wxmini-security-audit` 技能；深层 payload 库引用 `secknowledge` 技能。
 
-**本 skill 自带加解密工具**：`scripts/` 目录（24 个零依赖 Python 工具，国密 SM2/SM3/SM4 + 通用加密攻击 + HTTP 表单爆破），一键入口见 `crypto_cli.py`（详见「加解密与国密测试」章节）。
+**本 skill 自带工具**：`scripts/` 目录（25 个零依赖 Python 工具，国密 SM2/SM3/SM4 + 通用加密攻击 + HTTP 表单爆破 + **XSS 三型检测**），一键入口见 `crypto_cli.py`（详见「加解密与国密测试」章节）。
 
 ---
 
@@ -276,6 +276,7 @@ Shell 升级 / Linux+Windows 提权 / 凭据收集 / 横向移动 / 持久化 / 
 | 离线哈希破解 | hashcat, John the Ripper, hashid, Name-That-Hash, cupp, cewl, crunch, princeprocessor | 哈希破解、规则/掩码、字典定制生成 |
 | OAuth/WebSocket | oauth2-misconfig, jwt_tool, ws 客户端, Burp | 第三方登录、实时接口越权/CSWSH |
 | JS 分析 | de4js, jsluice, LinkFinder, gau, Arjun, paramspider | JS 反混淆、端点/密钥提取 |
+| XSS 三型检测 | **xss_scan.py(自带)**, DOM Invader(Burp 内置浏览器), PortSwigger XSS Cheat Sheet, XSStrike, dalfox | 反射型/存储型/DOM 型自动检测、注入上下文判定、source-sink 污点分析、`--selftest` 本地靶场自验 |
 | 加解密/国密 | scripts/ 自带 24 工具, crypto_cli.py | SM2/SM3/SM4/AES/DES/RSA/JWT 加解密攻击 |
 | 小程序 | wedecode, wxappUnpacker, wux1an/wxapkg, WechatOpenDevTools | wxapkg 反编译/调试/审计 |
 
