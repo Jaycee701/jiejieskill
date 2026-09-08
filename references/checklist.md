@@ -117,7 +117,7 @@
 - [ ] 7.7 Web 服务器解析漏洞
 
 ### 3.8 专项 / 补充（skill 原有覆盖，同样必测）
-- [ ] 加解密 / 国密（SM2/SM3/SM4，自带脚本，见 crypto-testing.md）
+- [ ] 加解密 / 国密（SM2/SM3/SM4、AES/DES/RSA/JWT 报文/签名实现缺陷：硬编码密钥、k 复用、弱随机；解密用 GmSSL/cyberchef）
 - [ ] OAuth / OIDC（第三方登录）
 - [ ] WebSocket（实时接口越权 / CSWSH）
 - [ ] API Top10（BOLA/BFLA/影子 API）

@@ -198,11 +198,11 @@ POST /profile/update  + credit=10000 / type=premium / quota=unlimited
 
 ## 10. JWT 攻击专项
 
-> 命中：登录/授权返回 JWT 的接口（含 API 网关）。工具：`scripts/jwt.py`（自带）、jwt_tool。
+> 命中：登录/授权返回 JWT 的接口（含 API 网关）。工具：jwt_tool（解析/混淆/爆破）。
 
 **测试流程（逐步）**：
 ```
-1. 解码：jwt_tool <token>  /  自带 scripts/jwt.py decode
+1. 解码：jwt_tool <token>
    → 看 alg、payload、exp/nbf/iss/aud 校验点
 2. 算法混淆：RS256→HS256（用公钥当 HMAC 密钥签名）
    jwt_tool <token> -X s -pk public.pem
@@ -266,7 +266,7 @@ X
 |------|---------|-----------|
 | SSTI/命令注入/XXE | 检测+绕过+利用+修复方法论 | web-vulns.md payload 菜单 |
 | 请求走私 | 检测+利用流程 | middleware-unath.md 单行 |
-| JWT | 逐步攻击流程 | auth-testing.md 提及 + scripts/jwt.py 工具 |
+| JWT | 逐步攻击流程 | auth-testing.md 提及 + jwt_tool 工具 |
 | CORS/子域接管/Host头/缓存/MassAssignment/开放重定向 | 全新方向 | 缺失 |
 
 > ⚠️ 所有验证：PoC 级即可，不执行破坏性/数据修改动作；遵守授权范围与速率（防反爬）。

@@ -12,7 +12,7 @@
 | # | 漏洞 | 测试要点 | 深挖 |
 |---|------|---------|------|
 | 1.1 | 弱口令 | 全入口（Web 后台/服务/中间件/数据库）跑弱口令字典；⚠️先确认真实账号再爆破，别拿猜测账号（admin/0001）测出「账号不存在」就误判无弱口令；登录框有 SQLi 时 `' or '1'='1`+密码P=弱口令探针 | `weakpass-check.md` |
-| 1.2 | 密码明文传输 | 抓包看登录/注册/改密是否 HTTP 明文、是否前端可逆加密（非 HTTPS） | `crypto-testing.md` |
+| 1.2 | 密码明文传输 | 抓包看登录/注册/改密是否 HTTP 明文、是否前端可逆加密（非 HTTPS） | `web-vulns.md` |
 | 1.3 | 用户名可枚举 | 登录/注册/找回接口响应差异（状态码/长度/文案/时延）判断用户是否存在 | `auth-testing.md` |
 | 1.4 | 暴力破解 | 无次数限制/无验证码的登录口跑字典；密码喷射避免锁定 | `password-cracking.md` |
 | 1.5 | 会话标识未更新 | 登录前后 session/cookie 是否变化（会话固定）；改密后旧 token 是否失效 | `auth-testing.md` |
@@ -130,7 +130,7 @@
 
 | 方向 | 触发场景 | 深挖 |
 |------|---------|------|
-| 加解密 / 国密 | SM2/SM3/SM4、AES/DES/RSA/JWT 加解密攻击（自带 scripts/ 工具） | `crypto-testing.md` |
+| 加解密 / 国密 | SM2/SM3/SM4、AES/DES/RSA/JWT 加解密攻击（GmSSL/openssl、cyberchef、jwt_tool；jadx/Frida 逆向找硬编码密钥） | 本章内 |
 | OAuth / OIDC | redirect_uri 篡改/state 缺失/scope 提权/token 窃取 | `auth-testing.md` |
 | WebSocket | 鉴权缺失/越权订阅/消息注入/CSWSH | `auth-testing.md` |
 | API Top10 | BOLA/BFLA/未限流/影子 API | `web-vulns.md` |

@@ -1,9 +1,9 @@
 ---
 name: jiejieskill
-description: 全流程渗透测试一站式技能：资产探测(Web+小程序)→PTES 7阶段→报告。覆盖 SQL/XSS/越权/认证全流程/短信验证码爆破(测试号<测试手机号>)/JS审查/加解密国密(自带SM2/SM3/SM4工具)/WAF/中间件/新兴攻击面(AI-LLM/GraphQL)。App 转 app-pentest，小程序引 wxmini，payload 库引 secknowledge。命令速查拆于 references/ 按需加载。
+description: 全流程渗透测试一站式技能：资产探测(Web+小程序)→PTES 7阶段→报告。覆盖 SQL/XSS/越权/认证全流程/短信验证码爆破(测试号<测试手机号>)/JS审查/WAF/中间件/新兴攻击面(AI-LLM/GraphQL)。App 转 app-pentest，小程序引 wxmini，payload 库引 secknowledge。命令速查拆于 references/ 按需加载。
 metadata:
   type: user
-  tags: [pentest, web-security, mobile, miniprogram, bank, crypto, gmssl, sm2, sm4, red-team, methodology]
+  tags: [pentest, web-security, mobile, miniprogram, bank, red-team, methodology]
 ---
 
 # 全流程渗透测试技能 (JieJie Full Penetration Testing Workflow)
@@ -12,7 +12,7 @@ metadata:
 
 **适用目标**：Web 网站 / 小程序 / 内网与域环境 / 云环境 / 金融与银行业务系统。**App（Android/iOS）单独使用 `app-pentest` 技能测试**；小程序深度自动化审计引用 `wxmini-security-audit` 技能；深层 payload 库引用 `secknowledge` 技能。
 
-**本 skill 自带工具**：`scripts/` 目录（25 个零依赖 Python 工具，国密 SM2/SM3/SM4 + 通用加密攻击 + HTTP 表单爆破），一键入口见 `crypto_cli.py`（详见「加解密与国密测试」章节）。
+**本 skill 自带工具**：`scripts/` 目录（零依赖 Python Web 测试工具：HTTP 表单爆破 + XSS 三型扫描，详见 `scripts/README.md`）。
 
 ---
 
@@ -31,7 +31,7 @@ metadata:
 5. **测试完成后自查复盘（出报告前必做，禁止测完直接交付）**：
    - **全清单逐类逐项检查，每一类都必须过一遍，无例外**（不是只看重点项）：
      对照 `references/checklist.md` 从头到尾，每个类别每项逐一核对「测了吗？结论是什么？证据在不在？」，包括但不限于：
-     SQL 注入、XSS、越权/IDOR、**认证全流程**、业务逻辑、文件上传、SSRF、WAF、中间件/反序列化/未授权、加解密/国密、OAuth/WebSocket/API、资产探测、目录枚举、CVE 探测、JS 提取；
+     SQL 注入、XSS、越权/IDOR、**认证全流程**、业务逻辑、文件上传、SSRF、WAF、中间件/反序列化/未授权、OAuth/WebSocket/API、资产探测、目录枚举、CVE 探测、JS 提取；
    - 任何一类**没测 → 要么补测，要么显式列明原因**，禁止当不存在；
    - 逐个漏洞自我质询：注入点真确认了吗（版本/列数/回显/绕过了哪层防护）？结论复核过吗（如版本差异致误判）？
    - 被反爬/WAF 中断的项，是否列明原因并给出浏览器手工复核步骤？
@@ -60,7 +60,7 @@ Asset Discovery → Pre-engagement → Intelligence Gathering → Threat Modelin
 
 ## 二、资产探测流程（Web + 小程序）
 
-> **一切渗透从资产探测开始**。先搞清「目标有哪些资产、各是什么类型」，再决定走哪条测试线。探测结果决定后续流程：**Web** 走本 skill 全流程；**小程序**走本 skill + 引用 wxmini 深度审计；**App** 转 `app-pentest` 单独测；**金融业务**走认证+业务逻辑+加解密国密章节。
+> **一切渗透从资产探测开始**。先搞清「目标有哪些资产、各是什么类型」，再决定走哪条测试线。探测结果决定后续流程：**Web** 走本 skill 全流程；**小程序**走本 skill + 引用 wxmini 深度审计；**App** 转 `app-pentest` 单独测；**金融业务**走认证+业务逻辑章节。
 
 ### 2.1 资产范围确定
 - 已知范围：域名 / IP 段 / 备案号 / 公司名
@@ -117,7 +117,7 @@ wxapkg.exe scan                                 # wux1an/wxapkg（Windows 二进
 | 微信小程序 | 本 skill 小程序静态分析 + **引用 wxmini-security-audit 深度审计** |
 | Android / iOS App | **转用 app-pentest 技能单独测试** |
 | App 后端 API | 本 skill API / 越权 / 认证 / JS 审查章节 |
-| 银行 / 金融 / 支付系统 | 本 skill 认证全流程 + 业务逻辑 + 加解密国密章节 |
+| 银行 / 金融 / 支付系统 | 本 skill 认证全流程 + 业务逻辑章节 |
 | 内网 / 域 / 云 | 本 skill 后渗透 / 域渗透 / 云深化章节 |
 
 ---
@@ -206,7 +206,6 @@ Discovery → Lateral Movement → Collection → Exfiltration → Impact
 | **全入口弱口令检测**(Web全入口/服务/中间件/后台默认口令) | 6.3 补充 | `references/weakpass-check.md` |
 | 输入框/登录框/文件上传下载、JS 源码审查 | 6.4/6.5 | `references/input-upload-js.md` |
 | 基础设施/网络、AD 侦察、云侦察、中间件/反序列化、未授权访问(数据库暴露) | 6.6-6.8/6.10/6.11 | `references/middleware-unath.md` |
-| 加解密与国密测试（**自带 scripts/ 工具**） | 6.12 | `references/crypto-testing.md` |
 | 新兴攻击面(AI/LLM/GraphQL/云原生)、实战复盘 | 6.13/6.14 | `references/emerging-reflexion.md` |
 | **高级/补充漏洞方向**：SSTI、命令注入、XXE、CORS、子域接管、Host Header/缓存投毒、开放重定向、Mass Assignment、JWT、请求走私、NoSQL | 补充 | `references/web-advanced-vulns.md` |
 
@@ -276,7 +275,6 @@ Shell 升级 / Linux+Windows 提权 / 凭据收集 / 横向移动 / 持久化 / 
 | 离线哈希破解 | hashcat, John the Ripper, hashid, Name-That-Hash, cupp, cewl, crunch, princeprocessor | 哈希破解、规则/掩码、字典定制生成 |
 | OAuth/WebSocket | oauth2-misconfig, jwt_tool, ws 客户端, Burp | 第三方登录、实时接口越权/CSWSH |
 | JS 分析 | de4js, jsluice, LinkFinder, gau, Arjun, paramspider | JS 反混淆、端点/密钥提取 |
-| 加解密/国密 | scripts/ 自带 24 工具, crypto_cli.py | SM2/SM3/SM4/AES/DES/RSA/JWT 加解密攻击 |
 | 小程序 | wedecode, wxappUnpacker, wux1an/wxapkg, WechatOpenDevTools | wxapkg 反编译/调试/审计 |
 
 ---
@@ -329,10 +327,6 @@ Shell 升级 / Linux+Windows 提权 / 凭据收集 / 横向移动 / 持久化 / 
 - jaysenwxapkg（Burp 插件，新版本解包+敏感信息提取）
 - WechatOpenDevTools-Python: https://github.com/JaveleyQAQ/WeChatOpenDevTools-Python
 
-**加解密 / 国密（本 skill 自带）**：
-- 入口：`python crypto_cli.py --list` / `jiejie_gui.pyw`；全部脚本见 `scripts/README.md`
-- 参考：GmSSL（openssl 国密分支）、Python `gmssl` 库、Frida（运行时抓密钥）
-
 ---
 
 ## 十四、参考文件索引
@@ -348,7 +342,6 @@ Shell 升级 / Linux+Windows 提权 / 凭据收集 / 横向移动 / 持久化 / 
 | `references/weakpass-check.md` | 全入口弱口令检测：Web全入口/服务中间件数据库/后台默认口令 |
 | `references/input-upload-js.md` | 输入框/上传下载、JS 源码审查 |
 | `references/middleware-unath.md` | 中间件/反序列化/未授权、AD/云侦察 |
-| `references/crypto-testing.md` | 加解密国密 + scripts/ 工具调用 |
 | `references/emerging-reflexion.md` | 新兴攻击面 + 实战复盘踩坑 |
 | `references/exploitation.md` | 漏洞利用、WebShell/免杀 |
 | `references/post-exploitation.md` | 后渗透、域/数据库/云深化 |

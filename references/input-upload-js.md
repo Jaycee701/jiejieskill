@@ -145,7 +145,7 @@ grep -riE 'api[_-]?key|secret|token|password|appid|appsecret|AKIA|BEGIN (RSA|PRI
 # 废弃功能 / 老接口：版本升级遗留的未授权端点、旧版 API 路径
 #   特征：/v1/ 老版本、测试路由、删除注释掉的接口
 # 泄露 KEY → API 利用：AK/SK、云密钥 → 调云 API / 接管存储桶
-#   （配合 crypto-testing.md 密钥提取；AK 识别后试 aliyun/aws cli）
+#   （逆向产物中搜 key/secret/iv 等硬编码密钥线索；AK 识别后试 aliyun/aws cli）
 # 注释中的接口说明 / 鉴权方式 / 加密方式
 # 加密算法线索：找 AES/SM4/加密参数 → 联动加解密章节
 # 第三方 SDK：支付/统计/推送（数据外带风险）

@@ -53,7 +53,7 @@ hydra -L users.txt -P weakpass.txt target http-post-form "/login:user=^USER^&pas
 nuclei -l targets.txt -t exposures/ -t misconfiguration/
 # HTTP Basic 弱口令
 hydra -L users.txt -P pass.txt target http-get /admin
-# JWT 弱密钥 / alg:none（用 scripts/jwt.py）
+# JWT 弱密钥 / alg:none（用 jwt_tool）
 # API key 硬编码在前端 JS / App
 ```
 
